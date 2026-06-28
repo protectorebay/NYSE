@@ -22,21 +22,51 @@ function formatTime(ms) {
 
 function updateTimer() {
 
-    console.log("UPDATE", new Date());
-
     const now = new Date();
 
+    // Aktuálny čas v New Yorku
     const ny = new Date(
         now.toLocaleString("en-US", {
             timeZone: "America/New_York"
         })
     );
 
+    const day = ny.getDay(); // 0 = Sunday, 6 = Saturday
+
     const todayOpen = new Date(ny);
     todayOpen.setHours(SESSION_OPEN_HOUR, 0, 0, 0);
 
     const todayClose = new Date(ny);
     todayClose.setHours(SESSION_CLOSE_HOUR, 0, 0, 0);
+
+    // =====================================================
+    // WEEKEND
+    // =====================================================
+
+    if (day === 6 || day === 0) {
+
+        let nextOpen = new Date(todayOpen);
+
+        if (day === 6) {
+            // Saturday -> Monday
+            nextOpen.setDate(nextOpen.getDate() + 2);
+        } else {
+            // Sunday -> Monday
+            nextOpen.setDate(nextOpen.getDate() + 1);
+        }
+
+        const left = nextOpen - ny;
+
+        timer.innerHTML =
+            'NEW YORK SESSION • <span class="weekend">WEEKEND</span> • OPENS IN ' +
+            formatTime(left);
+
+        return;
+    }
+
+    // =====================================================
+    // SESSION OPEN
+    // =====================================================
 
     if (ny >= todayOpen && ny < todayClose) {
 
@@ -46,7 +76,13 @@ function updateTimer() {
             'NEW YORK SESSION • <span class="open">OPEN</span> • CLOSES IN ' +
             formatTime(left);
 
-    } else {
+    }
+
+    // =====================================================
+    // SESSION CLOSED
+    // =====================================================
+
+    else {
 
         let nextOpen = new Date(todayOpen);
 
