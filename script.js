@@ -24,7 +24,7 @@ function updateTimer() {
 
     const now = new Date();
 
-    // Aktuálny čas v New Yorku
+    // Current New York time
     const ny = new Date(
         now.toLocaleString("en-US", {
             timeZone: "America/New_York"
@@ -72,8 +72,27 @@ function updateTimer() {
 
         const left = todayClose - ny;
 
+        let marketPhase = "";
+
+        // PRE MARKET (08:00 - 09:29)
+        if (
+            ny.getHours() < 9 ||
+            (ny.getHours() === 9 && ny.getMinutes() < 30)
+        ) {
+            marketPhase =
+                ' <span class="premarket">(PRE MARKET)</span>';
+        }
+
+        // POST MARKET (16:00 - 16:59)
+        else if (ny.getHours() >= 16) {
+            marketPhase =
+                ' <span class="postmarket">(POST MARKET)</span>';
+        }
+
         timer.innerHTML =
-            'NEW YORK SESSION • <span class="open">OPEN</span> • CLOSES IN ' +
+            'NEW YORK SESSION • <span class="open">OPEN</span>' +
+            marketPhase +
+            ' • CLOSES IN ' +
             formatTime(left);
 
     }
