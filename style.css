@@ -17,8 +17,8 @@ body{
 
     position:absolute;
 
-    left:0px;
-    top:0px;
+    left:10px;
+    top:5px;
 
     white-space:nowrap;
 
@@ -26,17 +26,24 @@ body{
     font-weight:700;
     line-height:1;
 
-    color:white;
+    color:#ffffff;
 
     text-align:left;
 
     text-shadow:
-        0 0 3px rgba(0,0,0,.9),
-        0 0 8px rgba(0,0,0,.9);
+        0 0 3px rgba(0,0,0,.95),
+        0 0 8px rgba(0,0,0,.95);
 
     user-select:none;
     -webkit-user-select:none;
+
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
 }
+
+/* ===========================
+   STATUS COLORS
+=========================== */
 
 .open{
     color:#33ff66;
@@ -52,4 +59,14 @@ body{
 
 .holiday{
     color:#ffd700;
+}
+
+.premarket{
+    color:#ffb000;
+    font-weight:700;
+}
+
+.postmarket{
+    color:#ffb000;
+    font-weight:700;
 }
