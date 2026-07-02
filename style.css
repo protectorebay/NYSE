@@ -41,9 +41,9 @@ body{
     -moz-osx-font-smoothing:grayscale;
 }
 
-/* ===========================
-   STATUS COLORSAAA
-=========================== */
+/* =====================================
+   STATUS COLORS
+===================================== */
 
 .open{
     color:#33ff66;
@@ -69,4 +69,30 @@ body{
 .postmarket{
     color:#ffb000;
     font-weight:700;
+}
+
+/* =====================================
+   PULSE ANIMATION
+===================================== */
+
+@keyframes pulse{
+
+    0%{
+        opacity:1;
+    }
+
+    50%{
+        opacity:.25;
+    }
+
+    100%{
+        opacity:1;
+    }
+
+}
+
+.pulse{
+
+    animation:pulse 1s linear infinite;
+
 }
